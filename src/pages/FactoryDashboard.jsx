@@ -23,6 +23,7 @@ const FactoryDashboard = () => {
 
   useEffect(() => {
     fetchDashboardData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchDashboardData = async () => {
@@ -315,7 +316,7 @@ const FactoryDashboard = () => {
           </div>
         </>
       )}
-{/* test Changes */}
+      {/* test Changes */}
     </div>
   )
 }

@@ -1,0 +1,70 @@
+﻿
+> client@0.0.0 lint
+> eslint .
+
+
+D:\BE Project\Agrolytics\src\components\AgroScroll.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\BE Project\Agrolytics\src\components\FieldConfigurationForm.jsx
+  23:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  21 |   useEffect(() => {
+  22 |     if (initialData) {
+> 23 |       setFormData({
+     |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  24 |         taluka: initialData.taluka || '',
+  25 |         season: initialData.season || '',
+  26 |         variety: initialData.variety || '',  react-hooks/set-state-in-effect
+
+D:\BE Project\Agrolytics\src\components\FieldMap.jsx
+   1:31  error  'useRef' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                no-unused-vars
+  76:9   error  Error: Cannot access variable before it is declared
+
+`calculateArea` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  74 |     if (points.length > 0) {
+  75 |         setPolygonPath(points);
+> 76 |         calculateArea(points);
+     |         ^^^^^^^^^^^^^ `calculateArea` accessed before it is declared
+  77 |     } else {
+  78 |         setPolygonPath([]);
+  79 |         setAcreage(0);
+
+   86 |   };
+   87 |
+>  88 |   const calculateArea = (pts) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  89 |     if (pts.length < 3) {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+>  90 |         setAcreage(0);
+      ΓÇª
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 102 |     setAcreage(areaAcres.toFixed(2));
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 103 |   };
+      | ^^^^^ `calculateArea` is declared here
+  104 |
+  105 |   const handleUndo = () => {
+  106 |     setPoints(points.slice(0, -1));  react-hooks/immutability
+
+D:\BE Project\Agrolytics\src\components\PredictionPanel.jsx
+  42:6  warning  React Hook useEffect has a missing dependency: 'validateAndFetch'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\BE Project\Agrolytics\src\pages\FactoryDashboard.jsx
+  26:6  warning  React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\BE Project\Agrolytics\src\pages\FieldDetails.jsx
+  31:6  warning  React Hook useEffect has a missing dependency: 'fetchFieldDetails'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\BE Project\Agrolytics\src\pages\LandingPage.jsx
+  3:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 8 problems (5 errors, 3 warnings)
+

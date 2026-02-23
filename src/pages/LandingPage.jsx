@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { CheckCircle, Star, Menu, X } from 'lucide-react'
 import AgroScroll from '../components/AgroScroll'

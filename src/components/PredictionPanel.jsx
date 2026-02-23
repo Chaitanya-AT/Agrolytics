@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { 
-  Leaf, 
-  Droplets, 
-  ThermometerSun, 
-  Wind, 
-  TrendingUp, 
-  Sprout, 
+import {
+  Leaf,
+  Droplets,
+  ThermometerSun,
+  Wind,
+  TrendingUp,
+  Sprout,
   RefreshCcw,
   MapPin,
   Calendar
@@ -39,19 +39,20 @@ const PredictionPanel = ({ details }) => {
 
   useEffect(() => {
     if (details) validateAndFetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
   const validateAndFetch = () => {
-      // API requires these specific fields to be present
-      const requiredFields = ['taluka', 'season', 'variety', 'soil_type', 'irrigation_method'];
-      const missing = requiredFields.filter(field => !details[field]);
+    // API requires these specific fields to be present
+    const requiredFields = ['taluka', 'season', 'variety', 'soil_type', 'irrigation_method'];
+    const missing = requiredFields.filter(field => !details[field]);
 
-      if (missing.length > 0) {
-          setError(`Configuration Incomplete: Missing ${missing.join(', ')}. Please update details.`);
-          return;
-      }
+    if (missing.length > 0) {
+      setError(`Configuration Incomplete: Missing ${missing.join(', ')}. Please update details.`);
+      return;
+    }
 
-      fetchPrediction();
+    fetchPrediction();
   };
 
   const fetchPrediction = async () => {
@@ -60,9 +61,9 @@ const PredictionPanel = ({ details }) => {
     try {
       const selectedWeather = TALUKA_WEATHER_DATA[details.taluka] || DEFAULT_WEATHER;
       const completeWeather = {
-          ...selectedWeather,
-          Avg_EVI: selectedWeather.Avg_NDVI * 0.6, 
-          Avg_LST_Celsius: selectedWeather.Avg_Max_Temp_Celsius - 2.0 
+        ...selectedWeather,
+        Avg_EVI: selectedWeather.Avg_NDVI * 0.6,
+        Avg_LST_Celsius: selectedWeather.Avg_Max_Temp_Celsius - 2.0
       };
 
       const payload = {
@@ -82,10 +83,10 @@ const PredictionPanel = ({ details }) => {
       });
 
       if (!response.ok) {
-           const errData = await response.json();
-           throw new Error(errData.error || 'Prediction API failed');
+        const errData = await response.json();
+        throw new Error(errData.error || 'Prediction API failed');
       }
-      
+
       const data = await response.json();
       setPrediction(data.predicted_yield);
     } catch (err) {
@@ -100,17 +101,17 @@ const PredictionPanel = ({ details }) => {
 
   // Render "Setup Required" state if error is about configuration
   if (error && error.includes('Configuration Incomplete')) {
-      return (
-          <div className="bento-wrapper">
-              <div className="bento-card hero-card" style={{ background: '#FFF3E0', border: '1px solid #FFB74D' }}>
-                  <div style={{ textAlign: 'center', padding: '2rem' }}>
-                      <h2 style={{ color: '#E65100' }}>Setup Required ⚠️</h2>
-                      <p style={{ margin: '1rem 0', color: '#5D4037' }}>{error}</p>
-                      <p style={{ fontSize: '0.9rem' }}>Go to the <strong>Configuration Tab</strong> to complete your field details.</p>
-                  </div>
-              </div>
+    return (
+      <div className="bento-wrapper">
+        <div className="bento-card hero-card" style={{ background: '#FFF3E0', border: '1px solid #FFB74D' }}>
+          <div style={{ textAlign: 'center', padding: '2rem' }}>
+            <h2 style={{ color: '#E65100' }}>Setup Required ⚠️</h2>
+            <p style={{ margin: '1rem 0', color: '#5D4037' }}>{error}</p>
+            <p style={{ fontSize: '0.9rem' }}>Go to the <strong>Configuration Tab</strong> to complete your field details.</p>
           </div>
-      );
+        </div>
+      </div>
+    );
   }
 
   // Calculated Values
@@ -133,7 +134,7 @@ const PredictionPanel = ({ details }) => {
       </div>
 
       <div className="bento-grid">
-        
+
         {/* HERO CARD: Yield Potential */}
         <div className="bento-card hero-card">
           <div className="card-bg-glow"></div>
@@ -151,7 +152,7 @@ const PredictionPanel = ({ details }) => {
               )}
             </div>
             <div className="hero-footer">
-              <TrendingUp size={16} /> 
+              <TrendingUp size={16} />
               <span>Based on <strong>{details.variety}</strong> crop data</span>
             </div>
           </div>
@@ -159,41 +160,41 @@ const PredictionPanel = ({ details }) => {
 
         {/* INFO CARD: Total Harvest */}
         <div className="bento-card info-card">
-           <div className="icon-box orange"><Sprout size={20} /></div>
-           <div>
-             <span className="card-label">Est. Harvest</span>
-             <h3 className="info-value">{loading ? '...' : totalYield} <small>T</small></h3>
-             <span className="subtext">For {details.area_size} Acres</span>
-           </div>
+          <div className="icon-box orange"><Sprout size={20} /></div>
+          <div>
+            <span className="card-label">Est. Harvest</span>
+            <h3 className="info-value">{loading ? '...' : totalYield} <small>T</small></h3>
+            <span className="subtext">For {details.area_size} Acres</span>
+          </div>
         </div>
 
         {/* CONTEXT CARD: Rainfall */}
         <div className="bento-card context-card">
-           <div className="icon-box blue"><Droplets size={20} /></div>
-           <div>
-             <span className="card-label">Annual Rainfall</span>
-             <h3 className="info-value">{currentWeather.Accumulated_Rainfall_mm} <small>mm</small></h3>
-             <span className="subtext">Regional Avg</span>
-           </div>
+          <div className="icon-box blue"><Droplets size={20} /></div>
+          <div>
+            <span className="card-label">Annual Rainfall</span>
+            <h3 className="info-value">{currentWeather.Accumulated_Rainfall_mm} <small>mm</small></h3>
+            <span className="subtext">Regional Avg</span>
+          </div>
         </div>
 
         {/* WIDGET CARD: Planting Date */}
         <div className="bento-card widget-card">
-            <div className="icon-box purple"><Calendar size={20} /></div>
-            <div>
-              <span className="card-label">Planting</span>
-              <h4 className="widget-value">{details.planting_date || 'Not Set'}</h4>
-              <span className="subtext">{details.season} Season</span>
-            </div>
+          <div className="icon-box purple"><Calendar size={20} /></div>
+          <div>
+            <span className="card-label">Planting</span>
+            <h4 className="widget-value">{details.planting_date || 'Not Set'}</h4>
+            <span className="subtext">{details.season} Season</span>
+          </div>
         </div>
 
         {/* PLACEHOLDER: Soil */}
         <div className="bento-card placeholder-card">
-           <div className="center-content">
-             <span className="coming-soon-badge">Coming Soon</span>
-             <h4>Soil Neural Net</h4>
-             <p>AI Analysis of N-P-K levels</p>
-           </div>
+          <div className="center-content">
+            <span className="coming-soon-badge">Coming Soon</span>
+            <h4>Soil Neural Net</h4>
+            <p>AI Analysis of N-P-K levels</p>
+          </div>
         </div>
 
       </div>

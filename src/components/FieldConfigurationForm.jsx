@@ -20,6 +20,7 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
 
   useEffect(() => {
     if (initialData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData({
         taluka: initialData.taluka || '',
         season: initialData.season || '',
@@ -50,13 +51,13 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
         <div className="form-group">
           <label>Taluka</label>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-             <select name="taluka" value={formData.taluka} onChange={handleChange} required style={{ flex: 1 }}>
-                <option value="">Select Taluka</option>
-                {TALUKAS.map(t => <option key={t} value={t}>{t}</option>)}
-             </select>
-             <button type="button" onClick={onFindOnMap} className="btn-secondary" style={{ fontSize: '1.2rem'}} title="Find on Map">
-                🗺️
-             </button>
+            <select name="taluka" value={formData.taluka} onChange={handleChange} required style={{ flex: 1 }}>
+              <option value="">Select Taluka</option>
+              {TALUKAS.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+            <button type="button" onClick={onFindOnMap} className="btn-secondary" style={{ fontSize: '1.2rem' }} title="Find on Map">
+              🗺️
+            </button>
           </div>
           <small style={{ color: '#666' }}>Or click map icon to auto-detect.</small>
         </div>
@@ -65,8 +66,8 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
         <div className="form-group">
           <label>Season</label>
           <select name="season" value={formData.season} onChange={handleChange} required>
-             <option value="">Select Season</option>
-             {SEASONS.map(s => <option key={s} value={s}>{s}</option>)}
+            <option value="">Select Season</option>
+            {SEASONS.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
 
@@ -74,8 +75,8 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
         <div className="form-group">
           <label>Sugarcane Variety</label>
           <select name="variety" value={formData.variety} onChange={handleChange} required>
-             <option value="">Select Variety</option>
-             {VARIETIES.map(v => <option key={v} value={v}>{v}</option>)}
+            <option value="">Select Variety</option>
+            {VARIETIES.map(v => <option key={v} value={v}>{v}</option>)}
           </select>
         </div>
 
@@ -83,8 +84,8 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
         <div className="form-group">
           <label>Soil Type</label>
           <select name="soil_type" value={formData.soil_type} onChange={handleChange} required>
-             <option value="">Select Soil Type</option>
-             {SOIL_TYPES.map(s => <option key={s} value={s}>{s}</option>)}
+            <option value="">Select Soil Type</option>
+            {SOIL_TYPES.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
 
@@ -92,37 +93,37 @@ const FieldConfigurationForm = ({ initialData, onSave, saving, onFindOnMap }) =>
         <div className="form-group">
           <label>Irrigation Method</label>
           <select name="irrigation_method" value={formData.irrigation_method} onChange={handleChange} required>
-             <option value="">Select Method</option>
-             {IRRIGATION_METHODS.map(m => <option key={m} value={m}>{m}</option>)}
+            <option value="">Select Method</option>
+            {IRRIGATION_METHODS.map(m => <option key={m} value={m}>{m}</option>)}
           </select>
         </div>
 
         {/* Planting Date */}
         <div className="form-group">
           <label>Planting Date</label>
-          <input 
-            type="date" 
-            name="planting_date" 
-            value={formData.planting_date} 
-            onChange={handleChange} 
-            required 
+          <input
+            type="date"
+            name="planting_date"
+            value={formData.planting_date}
+            onChange={handleChange}
+            required
           />
         </div>
 
         {/* Area Size (Acres) - Note: This technically belongs to 'fields' table but handled here for UI convienience */}
         <div className="form-group">
-            <label>Field Area (Acres)</label>
-            <input 
-                type="number" 
-                step="0.01"
-                placeholder="e.g. 2.5"
-                name="area_size"
-                value={formData.area_size}
-                onChange={handleChange}
-                readOnly
-                style={{ background: '#f9f9f9', cursor: 'not-allowed' }}
-                title="Use the Map to calculate area automatically"
-            />
+          <label>Field Area (Acres)</label>
+          <input
+            type="number"
+            step="0.01"
+            placeholder="e.g. 2.5"
+            name="area_size"
+            value={formData.area_size}
+            onChange={handleChange}
+            readOnly
+            style={{ background: '#f9f9f9', cursor: 'not-allowed' }}
+            title="Use the Map to calculate area automatically"
+          />
         </div>
       </div>
 

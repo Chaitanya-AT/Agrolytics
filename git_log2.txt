@@ -1,0 +1,20 @@
+﻿7339cd9 feat:Farmer dashboard Updates
+3980a4c test changes
+5167713 Merge pull request #6 from KshitijaTipale/feat_testBranch_kshitijaT
+30d016d feat:changes of factory dashboard
+7fc4695 Merge pull request #5 from KshitijaTipale/feat_factoryDash_kshitijaT
+94a834d feat: changes of factory dashboard
+9b27b2c Merge pull request #4 from sairajthorat/feat_landingPage_SairajT
+c98aa8e Merge pull request #3 from sairajthorat/feat_factoryLogin_sairajT
+1cdcd34 feat: Landing Page Added
+10b43bf feat:Factory page added
+657dc79 Merge pull request #2 from KshitijaTipale/feat_factoryDashboard_kshitijaT
+6e97140 feat: added comment
+2f9c4b4 Merge pull request #1 from sairajthorat/feat_mapYourField_sairajT
+c536504 feat:map your feaild on map
+6ed334a feat: run locally
+50d8b87 chore:removed unwanted files
+a5f397a fix:model not available
+94ecc98 fix: model not found
+a11c2e9 fix: Model not showing prediction
+1b09384 chore:Deployement in progress
